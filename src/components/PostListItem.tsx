@@ -1,0 +1,60 @@
+import { View, Text, Image, Pressable } from "react-native";
+import React from "react";
+import { Post } from "@/types";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Ionicons } from "@expo/vector-icons";
+
+dayjs.extend(relativeTime);
+
+const PostListItem = ({ post }: { post: Post }) => {
+  return (
+    <View className="flex-row p-4 border-b border-gray-800/70 ">
+      {/* use Avatar */}
+      <View className="mr-3">
+        <Image
+          source={{ uri: post.user.image }}
+          className="size-12 rounded-full"
+        />
+      </View>
+      <View className="flex-1">
+        {/* user info */}
+        <View className="flex-row items-center">
+          <Text className="text-white font-bold mr-2">
+            {post.user.username}
+          </Text>
+          <Text className="text-gray-500">
+            {dayjs(post.createdAt).fromNow()}
+          </Text>
+        </View>
+
+        {/* post content */}
+        <Text className="text-white mt-2 mb-3">{post.content}</Text>
+
+        {/* Interaction Buttons */}
+
+        <View className="flex-row gap-4 mt-2">
+          <Pressable className="flex-row items-center">
+            <Ionicons name="heart-outline" size={20} color="#d1d5db" />
+            <Text className="text-gray-300 ml-2">0</Text>
+          </Pressable>
+
+          <Pressable className="flex-row items-center">
+            <Ionicons name="chatbubble-outline" size={20} color="#d1d5db" />
+            <Text className="text-gray-300 ml-2">{post.replies.length}</Text>
+          </Pressable>
+          <Pressable className="flex-row items-center">
+            <Ionicons name="repeat-outline" size={20} color="#d1d5db" />
+            <Text className="text-gray-300 ml-2">0</Text>
+          </Pressable>
+
+          <Pressable>
+            <Ionicons name="paper-plane-outline" size={20} color="#d1d5db" />
+          </Pressable>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default PostListItem;

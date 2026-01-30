@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React from "react";
+import { dummyPosts } from "@/dummyData";
+import PostListItem from "@/components/PostListItem";
 
 const Feed = () => {
   return (
-    <View>
-      <Text className="text-xl font-bold text-green-500 mt-10">Feed</Text>
-    </View>
+    <FlatList
+      data={dummyPosts}
+      renderItem={(item) => <PostListItem post={item.item} />}
+    />
   );
 };
 
