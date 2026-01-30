@@ -1,7 +1,8 @@
-import React from "react";
+import "../../global.css";
 import { Slot } from "expo-router";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
-import { StatusBar, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
+import { StatusBar } from "expo-status-bar";
 const RootLayout = () => {
   const scheme = useColorScheme();
 
@@ -17,7 +18,7 @@ const RootLayout = () => {
   return (
     <ThemeProvider value={myTheme}>
       <StatusBar
-        barStyle={scheme === "dark" ? "light-content" : "dark-content"}
+        style={scheme === "dark" ? "light" : "dark"}
         backgroundColor={scheme === "dark" ? "#101010" : "#ffffff"}
       />
       <Slot />
