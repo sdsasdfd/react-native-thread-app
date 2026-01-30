@@ -3,6 +3,7 @@ import { Slot, Stack } from "expo-router";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { AuthProvider } from "@/providers/AuthProvider";
 const RootLayout = () => {
   const scheme = useColorScheme();
 
@@ -17,11 +18,13 @@ const RootLayout = () => {
   };
   return (
     <ThemeProvider value={myTheme}>
-      <StatusBar
-        style={scheme === "dark" ? "light" : "dark"}
-        backgroundColor={scheme === "dark" ? "#101010" : "#ffffff"}
-      />
-      <Stack />
+      <AuthProvider>
+        <StatusBar
+          style={scheme === "dark" ? "light" : "dark"}
+          backgroundColor={scheme === "dark" ? "#101010" : "#ffffff"}
+        />
+        <Stack />
+      </AuthProvider>
     </ThemeProvider>
   );
 };
