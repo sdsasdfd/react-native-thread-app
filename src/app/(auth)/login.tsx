@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Link } from "expo-router";
+import { supabase } from "@/lib/supabase";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -15,13 +16,23 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
-    console.log("Login clicked");
     if (!email || !password) {
       Alert.alert("Please enter an email and password");
       return;
     }
+
     try {
       setIsLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      console.log("error", error);
+
+      if (error) return Alert.alert(error.message);
+      setEmail("");
+      setPassword("");
     } catch (error) {
       console.error("Login error:", error);
       Alert.alert("Login error:", (error as Error).message);
