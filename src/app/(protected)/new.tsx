@@ -29,7 +29,15 @@ const New = () => {
           value={text}
           onChangeText={setText}
         />
-
+        <TextInput
+          className="text-white text-lg"
+          placeholder="What's on your mind?"
+          multiline={true}
+          numberOfLines={4}
+          placeholderTextColor={"gray"}
+          value={text}
+          onChangeText={setText}
+        />
         <View className="mt-auto">
           <Pressable className=" bg-white py-3 px-6 self-end rounded-full">
             <Text className="text-black font-bold">Post</Text>
